@@ -17,14 +17,14 @@ pipeline {
 
         stage('Push Image') {
             steps {
-                bat 'docker tag %IMAGE_NAME%:%IMAGE_TAG% yourdockerhub/%IMAGE_NAME%:%IMAGE_TAG%'
-                bat 'docker push yourdockerhub/%IMAGE_NAME%:%IMAGE_TAG%'
+                bat 'docker tag %IMAGE_NAME%:%IMAGE_TAG% jagadeesh604/%IMAGE_NAME%:%IMAGE_TAG%'
+                bat 'docker push jagadeesh604/%IMAGE_NAME%:%IMAGE_TAG%'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                bat 'kubectl set image deployment/devops-app devops-app=yourdockerhub/%IMAGE_NAME%:%IMAGE_TAG%'
+                bat 'kubectl set image deployment/devops-app devops-app=jagadeesh604/%IMAGE_NAME%:%IMAGE_TAG%'
             }
         }
     }
