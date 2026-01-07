@@ -5,20 +5,20 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Build number: ${7}"
-                bat 'docker build -t devops-app:${7} .'
+                bat 'docker build -t devops-app:%7% .'
             }
         }
 
-        stage('Pubat Image') {
+        stage('Push Image') {
             steps {
-                bat 'docker tag devops-app:${7} <jagadeebat604>/devops-app:${7}'
-                bat 'docker pubat <jagadeebat604>/devops-app:${7}'
+                bat 'docker tag devops-app:%7% yourdockerhub/devops-app:%7%'
+                bat 'docker push yourdockerhub/devops-app:%7%'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                bat 'kubectl set image deployment/devops-app devops-app=<jagadeebat604>/devops-app:${7}'
+                bat 'kubectl set image deployment/devops-app devops-app=yourdockerhub/devops-app:%7%'
             }
         }
     }
