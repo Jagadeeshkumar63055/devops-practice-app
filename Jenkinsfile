@@ -4,26 +4,26 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/<your-username>/devops-practice-app.git'
+                git 'https://github.com/Jagadeeshkumar63055/devops-practice-app'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t devops-app:${BUILD_NUMBER} .'
+                sh 'docker build -t devops-app:${7} .'
             }
         }
 
         stage('Push Image') {
             steps {
-                sh 'docker tag devops-app:${BUILD_NUMBER} <dockerhub-username>/devops-app:${BUILD_NUMBER}'
-                sh 'docker push <dockerhub-username>/devops-app:${BUILD_NUMBER}'
+                sh 'docker tag devops-app:${7} <jagadeesh604>/devops-app:${7}'
+                sh 'docker push <jagadeesh604>/devops-app:${7}'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl set image deployment/devops-app devops-app=<dockerhub-username>/devops-app:${BUILD_NUMBER}'
+                sh 'kubectl set image deployment/devops-app devops-app=<jagadeesh604>/devops-app:${7}'
             }
         }
     }
